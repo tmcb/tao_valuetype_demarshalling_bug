@@ -1,0 +1,29 @@
+module test
+{
+    abstract
+    interface AnAbstractInterface
+    {
+    };
+
+    typedef sequence<AnAbstractInterface> AnAbstractInterfaceSeq;
+
+    valuetype AValueType
+    supports AnAbstractInterface
+    {
+        public string content;
+    };
+
+    valuetype ADerivedValueType
+    : AValueType
+#ifdef WORKAROUND
+    supports AnAbstractInterface
+#endif
+    {
+    };
+
+    interface Producer
+    {
+        AnAbstractInterface    produce();
+        AnAbstractInterfaceSeq produceSequence();
+    };
+};
